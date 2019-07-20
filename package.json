@@ -8,9 +8,10 @@
   "main": "index.js",
   "scripts": {
     "build": "next build",
+    "deploy": "gh-pages -d out -b gh-pages",
     "dev": "next",
-    "start": "next start",
-    "export": "next export && cp -r extra/ out"
+    "export": "next export && cp -r extra/ out",
+    "start": "next start"
   },
   "dependencies": {
     "next": "^9.0.2",
@@ -21,6 +22,7 @@
     "@types/node": "^12.6.8",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
+    "gh-pages": "^2.0.1",
     "typescript": "^3.5.3"
   }
 }
