@@ -1,0 +1,59 @@
+version: 2.1
+
+executors:
+  default:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:lts
+commands:
+  prepare:
+    steps:
+      - checkout
+jobs:
+  test:
+    executor:
+      name: default
+    steps:
+      - prepare
+      - restore_cache:
+          keys:
+            - v{{ .Environment.CIRCLECI_CACHE_VERSION }}-dependencies-{{ .Branch }}
+            - v{{ .Environment.CIRCLECI_CACHE_VERSION }}-dependencies-develop
+      - run:
+          name: Install dependencies
+          command: yarn
+      - run:
+          name: Export Next Page
+          command: yarn export
+      - save_cache:
+          paths:
+            - node_modules
+          key: v{{ .Environment.CIRCLECI_CACHE_VERSION }}-dependencies-{{ .Branch }}
+  deploy:
+    executor:
+      name: default
+    steps:
+      - prepare
+      - restore_cache:
+          keys:
+            - v{{ .Environment.CIRCLECI_CACHE_VERSION }}-dependencies-{{ .Branch }}
+      - run:
+          name: Set up Git Config Email
+          command: |
+            git config user.email \"naturalclar.ci-build@example.com\"
+            git config user.name \"naturalclar.ci-build\"
+      - run:
+          name: Deploy to Github Pages
+          command: yarn deploy
+workflows:
+  version: 2.1
+  test_deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - /^(master)/
