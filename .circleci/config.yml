@@ -25,9 +25,6 @@ jobs:
       - run:
           name: Build Next Page
           command: yarn build
-      - run:
-          name: Export Next Page
-          command: yarn export
       - save_cache:
           paths:
             - node_modules
@@ -40,6 +37,13 @@ jobs:
       - restore_cache:
           keys:
             - v{{ .Environment.CIRCLECI_CACHE_VERSION }}-dependencies-{{ .Branch }}
+      - run:
+          name: Build Next Page
+          command: yarn build
+      - run:
+          name: Export Next Page
+          command: yarn export
+
       - run:
           name: Set up Git Config Email
           command: |
