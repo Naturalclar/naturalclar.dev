@@ -3,7 +3,9 @@ import Head from "next/head";
 const Meta = () => (
   <Head>
     <title>Naturalclar</title>
-    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="Description" content="Naturalclar's portfolio site" />
+    <meta charSet="utf-8" />
     <meta name="twitter:description" content={"Naturalclar's portfolio site"} />
     <meta property="og:description" content={"Naturalclar's portfolio site"} />
     <meta property="og:locale" content={"en_US"} />
@@ -31,12 +33,22 @@ const Meta = () => (
       href={`https://naturalclar.dev/`}
       title={"Naturalclar"}
     />
+    {/** Font Awesome */}
     <link
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
       crossOrigin="anonymous"
     />
+    {/** Google Fonts */}
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap"
+      rel="stylesheet"
+    />
+    {/** AMP Custom Style */}
+    <style amp-custom>{`
+      body {background-color: aliceblue;}
+    `}</style>
   </Head>
 );
 
