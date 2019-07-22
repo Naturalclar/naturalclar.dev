@@ -24,9 +24,7 @@ const Index: NextPage<{}> = () => {
         <Paragraph>Node.js, TypeScript, React, React-Native</Paragraph>
         <div
           style={{
-            display: "flex",
-            padding: 12,
-            justifyContent: "space-between"
+            display: "flex"
           }}
         >
           <Icon
