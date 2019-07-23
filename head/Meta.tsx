@@ -48,6 +48,7 @@ const Meta = () => (
     <style amp-custom>{`
       body {
         background-color: aliceblue;
+        font-family:'Source Sans Pro', sans-serif
       }
     `}</style>
   </Head>

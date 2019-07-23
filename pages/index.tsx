@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useAmp } from "next/amp";
 import { Avatar, Paragraph, Heading, Icon } from "../components/atoms";
 import { Page } from "../components/templates";
+import { Meta } from "../head";
 
 export const config = { amp: "amp" };
 
@@ -9,6 +10,7 @@ const Index: NextPage<{}> = () => {
   const isAmp = useAmp();
   return (
     <Page>
+      <Meta />
       <section
         style={{
           display: "flex",
