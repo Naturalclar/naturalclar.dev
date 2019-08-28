@@ -30,6 +30,11 @@ const Index: NextPage<{}> = () => {
           }}
         >
           <Icon
+            name="pencil"
+            href="https://blog.naturalclar.dev"
+            description="Link to Naturalclar's blog"
+          />
+          <Icon
             name="twitter"
             href="https://twitter.com/natural_clar"
             description="Link to Naturalclar's twitter account"
