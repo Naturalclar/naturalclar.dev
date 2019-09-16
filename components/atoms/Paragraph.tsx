@@ -6,7 +6,7 @@ type Props = {
   size?: number;
 };
 
-const Paragraph: React.FC<Props> = ({
+export const Paragraph: React.FC<Props> = ({
   children,
   color = "#666",
   bold = false,
@@ -24,5 +24,3 @@ const Paragraph: React.FC<Props> = ({
     {children}
   </p>
 );
-
-export default Paragraph;
