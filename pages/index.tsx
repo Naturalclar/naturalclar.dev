@@ -4,7 +4,7 @@ import { Avatar, Paragraph, Heading, Icon } from "../components/atoms";
 import { Page } from "../components/templates";
 import { Meta } from "../head";
 
-export const config = { amp: "amp" };
+export const config = { amp: true };
 
 const Index: NextPage<{}> = () => {
   const isAmp = useAmp();
