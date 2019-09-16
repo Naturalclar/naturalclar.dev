@@ -20,11 +20,11 @@ const Meta = () => (
       content={new Date("2019/07/20").toISOString()}
     />
     <meta property="article:author" content="naturalclar" />
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="NaturalClar" />
     <meta
       name="twitter:image"
-      content={`https://naturalclar.dev/static/cat_square.jpg`}
+      content={`https://naturalclar.dev/static/twitter_card.png`}
     />
     <link
       rel="alternate"
@@ -44,13 +44,6 @@ const Meta = () => (
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap"
       rel="stylesheet"
     />
-    {/** AMP Custom Style */}
-    <style amp-custom>{`
-      body {
-        background-color: aliceblue;
-        font-family:'Source Sans Pro', sans-serif
-      }
-    `}</style>
   </Head>
 );
 
