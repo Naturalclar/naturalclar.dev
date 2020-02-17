@@ -16,14 +16,24 @@ const Index: NextPage<{}> = () => {
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
-          alignItems: "center",
-          padding: 48
+          alignItems: "flex-start",
+          position: "relative",
+          padding: 24
         }}
       >
-        <Avatar src="/static/cat_square.jpg" isAmp={isAmp} alt="MyIcon" />
-        <Heading>Naturalclar</Heading>
-        <Paragraph>Front-end Developer at CureApp, Inc.</Paragraph>
-        <Paragraph>Node.js, TypeScript, React, React-Native</Paragraph>
+        <div style={{ display: "flex", width: 320, position: "relative" }}>
+          <Heading size={48}>Naturalclar</Heading>
+          <div style={{ position: "absolute", right: 30, top: 0 }}>
+            <Avatar src="/static/cat_square.jpg" isAmp={isAmp} alt="MyIcon" />
+          </div>
+        </div>
+        <Paragraph>Full Stack Open Source Developer</Paragraph>
+        <Paragraph>
+          Member of react-native-community, reason-react-native, asdf-community.
+        </Paragraph>
+        <Paragraph>
+          Maintainer for Japanese Translation of Gatsby.js, TypeScript Website.
+        </Paragraph>
         <div
           style={{
             display: "flex"

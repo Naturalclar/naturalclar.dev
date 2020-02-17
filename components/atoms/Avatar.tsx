@@ -7,8 +7,8 @@ type Props = {
   isAmp?: boolean;
 };
 
-const Avatar = ({ alt = "", src, size = 100, isAmp = false }: Props) => {
-  const style = { width: size, height: size, borderRadius: size / 2 };
+const Avatar = ({ alt = "", src, size = 60, isAmp = false }: Props) => {
+  const style = { width: size, height: size, borderRadius: size / 2, opacity: 0.5 };
   return isAmp ? (
     <amp-img style={style} src={src} width={size} height={size} alt={alt} />
   ) : (

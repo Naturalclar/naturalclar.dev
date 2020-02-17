@@ -18,7 +18,8 @@ export const Paragraph: React.FC<Props> = ({
       fontWeight: bold ? "bold" : "normal",
       fontSize: size,
       padding: 0,
-      margin: 0
+      margin: 0,
+      marginBottom: 8,
     }}
   >
     {children}
