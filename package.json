@@ -10,7 +10,7 @@
     "build": "next build",
     "deploy": "gh-pages -d out -o gh-pages -b master",
     "dev": "next",
-    "export": "next export && cp -r extra/ out",
+    "export": "next export && cp -r extra/* out",
     "start": "next start"
   },
   "dependencies": {
