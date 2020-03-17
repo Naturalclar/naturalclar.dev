@@ -3,7 +3,7 @@ import Head from "next/head";
 const Meta = () => (
   <Head>
     <title>Naturalclar</title>
-    <link rel="icon" type="image/png" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/static/favicon.ico" sizes="32x32" />
     <meta name="Description" content="Naturalclar's portfolio site" />
     <meta charSet="utf-8" />
     <meta name="twitter:description" content={"Naturalclar's portfolio site"} />
