@@ -37,7 +37,7 @@ jobs:
         run: git remote add gh-pages git@github.com:Naturalclar/naturalclar.github.io.git
 
       - name: Echo origin
-        run: git remove -v
+        run: git remote -v
 
       - name: Install packages
         run: yarn --frozen-lockfile
