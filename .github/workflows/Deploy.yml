@@ -47,6 +47,9 @@ jobs:
         
       - name: Prepare Deploy
         run: yarn export
+      
+      - name: echo "${GITHUB_ACTOR}"
+        run: echo "${GITHUB_ACTOR}"
 
       - name: Deploy to GitHub Pages
         run: |
