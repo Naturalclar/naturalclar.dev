@@ -34,7 +34,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Add origin
-        run: git remote add gh-pages git@github.com:Naturalclar/naturalclar.github.io.git
+        run: git remote add gh-pages https://github.com/Naturalclar/naturalclar.github.io.git
 
       - name: Echo origin
         run: git remote -v
@@ -48,9 +48,6 @@ jobs:
       - name: Prepare Deploy
         run: yarn export
       
-      - name: echo "${GITHUB_ACTOR}"
-        run: echo "${GITHUB_ACTOR}"
-
       - name: Deploy to GitHub Pages
         run: |
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
