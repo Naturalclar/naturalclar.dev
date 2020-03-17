@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "build": "next build",
-    "deploy": "gh-pages -d out -o gh-pages -b master",
+    "deploy": "gh-pages -d out -b master -r https://github.com/Naturalclar/naturalclar.github.io",
     "dev": "next",
     "export": "next export && cp -r extra/ out",
     "start": "next start"
