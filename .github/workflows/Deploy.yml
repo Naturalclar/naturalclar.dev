@@ -36,6 +36,9 @@ jobs:
       - name: Install packages
         run: yarn --frozen-lockfile
 
+      - name: Prepare Deploy
+        run: yarn export
+
       - name: Deploy to GitHub Pages
         run: |
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
