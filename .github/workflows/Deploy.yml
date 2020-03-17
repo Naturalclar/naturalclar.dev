@@ -33,6 +33,12 @@ jobs:
           path: ${{ steps.yarn.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
+      - name: Add origin
+        run: git remote add gh-pages git@github.com:Naturalclar/naturalclar.github.io.git
+
+      - name: Echo origin
+        run: git remove -v
+
       - name: Install packages
         run: yarn --frozen-lockfile
 
@@ -47,4 +53,4 @@ jobs:
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global user.name "${GITHUB_ACTOR}"
           echo "machine github.com login ${GITHUB_ACTOR} password ${{ secrets.GITHUB_TOKEN }}" > ~/.netrc
-          GIT_USER=${GITHUB_ACTOR} yarn deploy
+          yarn deploy
