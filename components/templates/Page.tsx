@@ -7,8 +7,8 @@ const style = {
     left: 0,
     right: 0,
     bottom: 0,
-    fontFamily: "Source Sans Pro"
-  }
+    fontFamily: "Source Sans Pro",
+  },
 };
 
 type Props = {

@@ -18,7 +18,7 @@ const Index: NextPage<{}> = () => {
           flexDirection: "column",
           alignItems: "flex-start",
           position: "relative",
-          padding: 24
+          padding: 24,
         }}
       >
         <div style={{ display: "flex", width: 320, position: "relative" }}>
@@ -36,7 +36,7 @@ const Index: NextPage<{}> = () => {
         </Paragraph>
         <div
           style={{
-            display: "flex"
+            display: "flex",
           }}
         >
           <Icon
