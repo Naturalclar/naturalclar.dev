@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 const style = {
   container: {
@@ -7,11 +7,12 @@ const style = {
     left: 0,
     right: 0,
     bottom: 0,
-    fontFamily: "Source Sans Pro"
-  }
+    fontFamily: "Source Sans Pro",
+  },
 };
 
 type Props = {
+  children: React.ReactNode;
   color?: string;
 };
 
