@@ -12,14 +12,14 @@ jobs:
     if: github.repository == 'Naturalclar/naturalclar.dev'
 
     env:
-      node-version: 12.x
+      node-version: 20.x
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2.0.0
 
       - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v1.4.0
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
 
@@ -30,8 +30,8 @@ jobs:
       - name: Restore yarn cache
         uses: actions/cache@v1.1.2
         with:
-          path: ${{ steps.yarn.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          path: ${{ steps.pnpm.outputs.dir }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles(format('{0}{1}', github.workspace, '/pnpm-lock.yaml')) }}
 
       - name: Add origin
         run: git remote add gh-pages https://github.com/Naturalclar/naturalclar.github.io.git
@@ -40,17 +40,17 @@ jobs:
         run: git remote -v
 
       - name: Install packages
-        run: yarn --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build Website
-        run: yarn build
-        
+        run: pnpm build
+
       - name: Prepare Deploy
-        run: yarn export
-      
+        run: pnpm export
+
       - name: Deploy to GitHub Pages
         run: |
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global user.name "${GITHUB_ACTOR}"
           echo "machine github.com login ${GITHUB_ACTOR} password ${{ secrets.GH_TOKEN }}" > ~/.netrc
-          yarn deploy
+          pnpm deploy
