@@ -18,18 +18,22 @@ jobs:
         with:
           node-version: ${{ env.node-version }}
 
-      - name: Get yarn cache directory
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Get pnpm cache directory
         id: pnpm
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "::set-output name=dir::$(pnpm store path)"
 
       - name: Restore pnpm cache
-        uses: actions/cache@v1.1.2
+        uses: actions/cache@v3
         with:
           path: ${{ steps.pnpm.outputs.dir }}
           key: ${{ runner.os }}-pnpm-${{ hashFiles(format('{0}{1}', github.workspace, '/pnpm-lock.yaml')) }}
 
       - name: Install packages
-        run: pnpm i --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Test Build
         run: pnpm build
