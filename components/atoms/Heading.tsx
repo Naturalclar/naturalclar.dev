@@ -1,6 +1,7 @@
-import React from "react";
+import * as React from "react";
 
 type Props = {
+  children: React.ReactNode;
   color?: string;
   bold?: boolean;
   size?: number;
@@ -10,7 +11,7 @@ const Heading: React.FC<Props> = ({
   children,
   color = "#222",
   bold = false,
-  size = 24
+  size = 24,
 }) => (
   <h1
     style={{
