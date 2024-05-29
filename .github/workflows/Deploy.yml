@@ -51,10 +51,9 @@ jobs:
 
       - name: Prepare Deploy
         run: pnpm export
-
-      - name: Deploy to GitHub Pages
+      - name: Deploy with gh-pages
         run: |
-          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git config --global user.name "${GITHUB_ACTOR}"
-          echo "machine github.com login ${GITHUB_ACTOR} password ${{ secrets.GH_TOKEN }}" > ~/.netrc
-          pnpm run deploy
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npx gh-pages -d build -u "github-actions-bot <support+actions@github.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
