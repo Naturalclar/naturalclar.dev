@@ -75,6 +75,26 @@ The `pnpm deploy` script does something different: `gh-pages -d out -o gh-pages 
 targets the remote named `gh-pages` (the separate `naturalclar.github.io` repo) and the
 `master` branch there. Do not assume the two paths are interchangeable.
 
+## Shipping a change
+
+Because a push to `master` deploys, changes reach it through a pull request rather than a
+direct push. The loop does not end at `git push`:
+
+1. Branch off the latest `master`.
+2. Commit.
+3. `git push -u origin <branch>`.
+4. **Open the pull request.**
+
+Step 4 is part of the task, not a follow-up to ask about. A pushed branch with no PR is not
+a delivered change — nobody reviews it, nothing merges it, and its CI result goes unread.
+If the work is not ready for review, open the PR as a draft instead of leaving the branch
+dangling.
+
+Then watch the PR through to a conclusion: CI runs `lint`, `type-check` and `build` on every
+push, so a red run is yours to fix rather than to report and leave. Merging is the author's
+call, not an automatic next step — say the PR is green and let the human decide, unless they
+have already asked you to merge.
+
 ## Gotchas
 
 - `tsconfig.tsbuildinfo` is **tracked in git**, so `pnpm type-check` and `pnpm build` dirty
@@ -83,5 +103,10 @@ targets the remote named `gh-pages` (the separate `naturalclar.github.io` repo) 
   AMP Optimizer cannot fetch the runtime version from `cdn.ampproject.org` and emits
   `style[amp-runtime]` without `i-amphtml-version`. This is environmental, not a code
   defect; compare against an unmodified checkout before investigating.
-- CI pins pnpm 9 while the lockfile is `lockfileVersion: '9.0'`; pnpm 10 writes the same
-  version, so regenerating locally with pnpm 10 stays compatible with `--frozen-lockfile`.
+- **pnpm's version lives in `package.json`'s `packageManager` field**, not in the workflows.
+  `pnpm/action-setup` reads it and neither workflow passes a `version` input, so bump the
+  field rather than the YAML. pnpm 11 keeps `lockfileVersion: '9.0'`, so the lockfile does
+  not need regenerating.
+- `pnpm-workspace.yaml` exists solely to deny `sharp`'s install scripts — pnpm 10+ turned
+  unapproved build scripts into a hard install error. This setting is read **only** from
+  that file; a `pnpm` key in `package.json` is silently ignored.
