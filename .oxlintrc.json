@@ -1,0 +1,37 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "typescript",
+    "unicorn",
+    "oxc",
+    "react",
+    "nextjs",
+    "jsx-a11y",
+    "import"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "error"
+  },
+  "env": {
+    "builtin": true,
+    "browser": true
+  },
+  "rules": {
+    // Next.js compiles JSX with the automatic runtime, so `React` does not
+    // need to be in scope. Same reason eslint-config-next turns this off.
+    "react/react-in-jsx-scope": "off",
+
+    // `next/image` requires a loader that `output: "export"` does not provide,
+    // and it cannot render inside AMP pages. Avatar.tsx deliberately emits a
+    // raw <img> for the non-AMP branch and <amp-img> for the AMP one.
+    "nextjs/no-img-element": "off",
+
+    // The rule guards against a font that loads on only one page. This site is
+    // a single AMP page whose <head> is built by head/Meta.tsx, so the font is
+    // already loaded everywhere it is needed.
+    "nextjs/no-page-custom-font": "off"
+  },
+  "ignorePatterns": [".next", "out", "node_modules"]
+}

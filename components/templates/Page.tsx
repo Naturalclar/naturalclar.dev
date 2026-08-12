@@ -2,7 +2,7 @@ import * as React from "react";
 
 const style = {
   container: {
-    position: "absolute" as "absolute",
+    position: "absolute" as const,
     top: 0,
     left: 0,
     right: 0,

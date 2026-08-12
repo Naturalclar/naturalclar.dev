@@ -11,6 +11,8 @@
     "deploy": "gh-pages -d out -o gh-pages -b master",
     "dev": "next",
     "export": "cp -r extra/* out",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "start": "next start",
     "type-check": "tsc --noEmit"
   },
@@ -26,6 +28,7 @@
     "@types/react-dom": "^19.1.6",
     "@types/styled-components": "^5.1.34",
     "gh-pages": "^5.0.0",
+    "oxlint": "^1.78.0",
     "typescript": "^5.4.5"
   }
 }
