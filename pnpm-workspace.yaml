@@ -1,0 +1,6 @@
+# sharp arrives transitively via Next.js and is only needed by next/image,
+# which this project cannot use: the page is AMP and the build is a static
+# export with no image loader. Denying its install scripts keeps them from
+# running without losing anything.
+allowBuilds:
+  sharp: false
