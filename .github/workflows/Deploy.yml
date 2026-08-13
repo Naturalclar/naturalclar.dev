@@ -12,20 +12,21 @@ jobs:
     if: github.repository == 'Naturalclar/naturalclar.dev'
 
     env:
-      node-version: 24.x
+      node-runtime: node@24
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v6
-
-      - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v7
+      # pnpm/setup は pnpm 本体と JS ランタイムの両方を入れるため、
+      # actions/setup-node は不要。install は既定で走るが --frozen-lockfile を
+      # 渡せないので false にし、あとで明示的に実行する。
+      - name: Setup pnpm and Node.js
+        uses: pnpm/setup@v2
         with:
-          node-version: ${{ env.node-version }}
-          cache: 'pnpm'
+          runtime: ${{ env.node-runtime }}
+          cache: true
+          install: false
 
       - name: Add origin
         run: git remote add gh-pages https://github.com/Naturalclar/naturalclar.github.io.git
@@ -42,8 +43,10 @@ jobs:
       - name: Prepare Deploy
         run: pnpm export
       - name: Deploy with gh-pages
+        # gh-pages は devDependency なので pnpm exec で解決できる。npx だと
+        # 毎回レジストリから取り直すうえ、npm 自体に依存してしまう。
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npx gh-pages -d out -u "github-actions-bot <support+actions@github.com>"
+          pnpm exec gh-pages -d out -u "github-actions-bot <support+actions@github.com>"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

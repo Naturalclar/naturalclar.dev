@@ -7,20 +7,21 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      node-version: 24.x
+      node-runtime: node@24
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v6
-
-      - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v7
+      # pnpm/setup は pnpm 本体と JS ランタイムの両方を入れるため、
+      # actions/setup-node は不要。install は既定で走るが --frozen-lockfile を
+      # 渡せないので false にし、次のステップで明示的に実行する。
+      - name: Setup pnpm and Node.js
+        uses: pnpm/setup@v2
         with:
-          node-version: ${{ env.node-version }}
-          cache: 'pnpm'
+          runtime: ${{ env.node-runtime }}
+          cache: true
+          install: false
 
       - name: Install packages
         run: pnpm install --frozen-lockfile
