@@ -76,14 +76,21 @@ site is a single page).
 ## Deployment
 
 **Pushing to `master` deploys to production.** `.github/workflows/Deploy.yml` triggers on
-push to `master`, builds, runs `pnpm export`, then publishes `out/` with `npx gh-pages`.
-It re-points `origin` at the current repo first, so it lands on the `gh-pages` branch of
-`naturalclar.dev`. The workflow is guarded by `if: github.repository ==
-'Naturalclar/naturalclar.dev'` so forks do not deploy.
+push to `master`, builds, runs `pnpm export`, then publishes `out/` with `gh-pages`. The
+workflow is guarded by `if: github.repository == 'Naturalclar/naturalclar.dev'` so forks do
+not deploy.
 
-The `pnpm deploy` script does something different: `gh-pages -d out -o gh-pages -b master`
-targets the remote named `gh-pages` (the separate `naturalclar.github.io` repo) and the
-`master` branch there. Do not assume the two paths are interchangeable.
+**The site is served from a different repository than this one.** `naturalclar.dev` is the
+custom domain of `Naturalclar/naturalclar.github.io` — the user page — so its `master`
+branch is what visitors get, and project pages for the account are served under
+`naturalclar.dev/<repo>/`. Deploy therefore publishes across repositories, which
+`secrets.GITHUB_TOKEN` cannot do: it needs a PAT with push access to
+`naturalclar.github.io`, stored as the `PAGES_DEPLOY_TOKEN` secret. The `pnpm deploy`
+script targets the same place by hand, via a local remote named `gh-pages`.
+
+This repo also has its own stale `gh-pages` branch. Deploy published there from 2024 until
+this was corrected, and none of it ever reached the live site — the branch and its `CNAME`
+are leftovers. Do not treat it as the deployment target.
 
 ## Shipping a change
 
@@ -109,6 +116,9 @@ have already asked you to merge.
 
 - `tsconfig.tsbuildinfo` is **tracked in git**, so `pnpm type-check` and `pnpm build` dirty
   the working tree. Restore it before committing unless the change is intentional.
+- `next-env.d.ts` is tracked too and flips depending on which command ran last: `next dev`
+  writes imports of `./.next/dev/types/*`, `next build` writes `./.next/types/*`. Either
+  type-checks, so restore it rather than committing the churn.
 - **pnpm's version lives in `package.json`'s `packageManager` field**, not in the workflows.
   `pnpm/setup` reads it and neither workflow passes a `version` input, so bump the
   field rather than the YAML. pnpm 11 keeps `lockfileVersion: '9.0'`, so the lockfile does

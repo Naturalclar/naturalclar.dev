@@ -28,12 +28,6 @@ jobs:
           cache: true
           install: false
 
-      - name: Add origin
-        run: git remote add gh-pages https://github.com/Naturalclar/naturalclar.github.io.git
-
-      - name: Echo origin
-        run: git remote -v
-
       - name: Install packages
         run: pnpm install --frozen-lockfile
 
@@ -42,11 +36,20 @@ jobs:
 
       - name: Prepare Deploy
         run: pnpm export
-      - name: Deploy with gh-pages
-        # gh-pages は devDependency なので pnpm exec で解決できる。npx だと
-        # 毎回レジストリから取り直すうえ、npm 自体に依存してしまう。
+
+      # naturalclar.dev を配信しているのは Naturalclar/naturalclar.github.io の
+      # master (ユーザーページ)。このリポジトリの gh-pages ブランチに publish
+      # しても公開サイトには出ないため、別リポジトリを直接指定する。
+      #
+      # secrets.GITHUB_TOKEN は自リポジトリにしか書き込めないので、
+      # naturalclar.github.io への push 権限を持つ PAT を PAGES_DEPLOY_TOKEN
+      # として登録しておくこと。
+      - name: Deploy to naturalclar.github.io
         run: |
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          pnpm exec gh-pages -d out -u "github-actions-bot <support+actions@github.com>"
+          pnpm exec gh-pages \
+            -d out \
+            -b master \
+            -r "https://git:${PAGES_DEPLOY_TOKEN}@github.com/Naturalclar/naturalclar.github.io.git" \
+            -u "github-actions-bot <support+actions@github.com>"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAGES_DEPLOY_TOKEN: ${{ secrets.PAGES_DEPLOY_TOKEN }}
