@@ -1,13 +1,14 @@
 import { NextPage } from "next";
-import { useAmp } from "next/amp";
 import { Avatar, Paragraph, Heading, Icon } from "../components/atoms";
 import { Page } from "../components/templates";
 import { Meta } from "../head";
 
-export const config = { amp: true };
+// このページは完全に静的で、クライアント側の状態も操作も無い。ハイドレーション
+// 用のバンドルは何も仕事をしないので、production では出力しない。
+// Next.js 16 系にも残っている Pages Router の設定 (server/render.tsx)。
+export const config = { unstable_runtimeJS: false };
 
 const Index: NextPage<{}> = () => {
-  const isAmp = useAmp();
   return (
     <Page>
       <Meta />
@@ -24,7 +25,7 @@ const Index: NextPage<{}> = () => {
         <div style={{ display: "flex", width: 320, position: "relative" }}>
           <Heading size={48}>Naturalclar</Heading>
           <div style={{ position: "absolute", right: 30, top: 0 }}>
-            <Avatar src="/static/cat_square.jpg" isAmp={isAmp} alt="MyIcon" />
+            <Avatar src="/static/cat_square.jpg" alt="MyIcon" />
           </div>
         </div>
         <Paragraph>Full Stack Open Source Developer</Paragraph>
