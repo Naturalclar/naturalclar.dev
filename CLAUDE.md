@@ -41,12 +41,15 @@ CSS-in-JS dependency. `Page.tsx` holds the layout container style; everything el
 at the call site. Global `body` styling is injected as a raw `<style>` tag from
 `pages/_document.tsx`'s `getInitialProps`.
 
-Two external stylesheets are loaded by `<link>` from `head/Meta.tsx`, not from npm:
+One external stylesheet is loaded by `<link>` from `head/Meta.tsx`, not from npm:
+**Google Fonts (Source Sans Pro)**, referenced by `fontFamily` in `Page.tsx` and
+`_document.tsx`.
 
-- **Font Awesome 4.7.0** off `maxcdn.bootstrapcdn.com`. `components/atoms/Icon.tsx` renders
-  icons purely as `fa fa-${name}` class names, so the whole icon set depends on this CDN.
-- **Google Fonts (Source Sans Pro)**, referenced by `fontFamily` in `Page.tsx` and
-  `_document.tsx`.
+Icons are **inline SVG**, one React component each under `components/atoms/icons/`.
+`Icon.tsx` maps a name to a component and supplies the accessible name — on the wrapping
+`<a>` when there is an `href`, otherwise via a `<title>` inside the SVG. Each glyph sets
+`fill="currentColor"`, so colour comes from the caller. There is no icon font and no icon
+CDN; adding an icon means adding a component and an entry in that map.
 
 `head/Meta.tsx` is rendered from inside the page rather than from `_document.tsx`, and
 carries the full SEO/OG/Twitter card set.

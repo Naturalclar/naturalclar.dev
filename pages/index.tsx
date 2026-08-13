@@ -45,9 +45,9 @@ const Index: NextPage<{}> = () => {
             description="Link to Naturalclar's blog"
           />
           <Icon
-            name="twitter"
+            name="x"
             href="https://twitter.com/natural_clar"
-            description="Link to Naturalclar's twitter account"
+            description="Link to Naturalclar's X account"
           />
           <Icon
             name="github"
