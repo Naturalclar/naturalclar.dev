@@ -33,13 +33,6 @@ const Meta = () => (
       href={`https://naturalclar.dev/`}
       title={"Naturalclar"}
     />
-    {/** Font Awesome */}
-    <link
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
-      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-      crossOrigin="anonymous"
-    />
     {/** Google Fonts */}
     <link
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap"
