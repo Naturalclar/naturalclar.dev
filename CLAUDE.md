@@ -116,3 +116,20 @@ have already asked you to merge.
 - `pnpm-workspace.yaml` exists solely to deny `sharp`'s install scripts — pnpm 10+ turned
   unapproved build scripts into a hard install error. This setting is read **only** from
   that file; a `pnpm` key in `package.json` is silently ignored.
+- **`next dev` rewrites the bottom of this file.** Next 16 appends the
+  `nextjs-agent-rules` block below and re-adds it on every dev run, so it is committed
+  rather than fought. Deleting it just dirties the tree again. To stop it instead, set
+  `agentRules: false` in `next.config.js`.
+- `next build` also rewrites `tsconfig.json` when it disagrees with it — Next 16 forced
+  `moduleResolution: bundler` and `jsx: react-jsx` on the upgrade. Commit those rather than
+  reverting them.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

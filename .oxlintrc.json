@@ -32,5 +32,8 @@
     // single page, so the font is already loaded everywhere it is needed.
     "nextjs/no-page-custom-font": "off"
   },
-  "ignorePatterns": [".next", "out", "node_modules"]
+  // next-env.d.ts は Next.js が生成し、ファイル自身が編集を禁じている。
+  // Next 16 から副作用 import を含むようになり import/no-unassigned-import に
+  // 触れるが、こちらでは直せないので対象外にする。
+  "ignorePatterns": [".next", "out", "node_modules", "next-env.d.ts"]
 }
