@@ -24,13 +24,12 @@
     "react/react-in-jsx-scope": "off",
 
     // `next/image` requires a loader that `output: "export"` does not provide,
-    // and it cannot render inside AMP pages. Avatar.tsx deliberately emits a
-    // raw <img> for the non-AMP branch and <amp-img> for the AMP one.
+    // so Avatar.tsx emits a raw <img>.
     "nextjs/no-img-element": "off",
 
-    // The rule guards against a font that loads on only one page. This site is
-    // a single AMP page whose <head> is built by head/Meta.tsx, so the font is
-    // already loaded everywhere it is needed.
+    // The rule guards against a font that loads on only one page. head/Meta.tsx
+    // is rendered from the page rather than from _document, but the site is a
+    // single page, so the font is already loaded everywhere it is needed.
     "nextjs/no-page-custom-font": "off"
   },
   "ignorePatterns": [".next", "out", "node_modules"]
